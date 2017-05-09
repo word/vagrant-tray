@@ -24,9 +24,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        vtray.cpp
+        vtray.cpp \
+    vagrant.cpp
 
-HEADERS  += vtray.h
+HEADERS  += vtray.h \
+    vagrant.h
 
 RESOURCES += \
     vtray.qrc

@@ -2,6 +2,7 @@
 #define VTRAY_H
 
 #include <QSystemTrayIcon>
+#include "vagrant.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -16,12 +17,13 @@ public:
     VTray();
 
 public slots:
-    void checkStatus();
+    void setStatus();
 
 private:
     QAction *quitAction;
     QMenu *trayIconMenu;
     QTimer *timer;
+    Vagrant *vagrant;
 };
 
 #endif // VTRAY_H
