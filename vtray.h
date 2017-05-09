@@ -15,9 +15,13 @@ class VTray : public QSystemTrayIcon
 public:
     VTray();
 
+public slots:
+    void checkStatus();
+
 private:
     QAction *quitAction;
     QMenu *trayIconMenu;
+    QTimer *timer;
 };
 
 #endif // VTRAY_H
