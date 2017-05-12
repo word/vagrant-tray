@@ -23,7 +23,7 @@ private:
     QAction *quitAction;
     QMenu *trayIconMenu;
     QTimer *timer;
-    Vagrant *vagrant;
+    Vagrant *vagrant = new Vagrant;
 };
 
 #endif // VTRAY_H

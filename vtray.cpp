@@ -12,7 +12,6 @@
 
 VTray::VTray()
 {
-
     // set up actions
     quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
@@ -35,7 +34,7 @@ VTray::VTray()
 
 void VTray::setStatus() {
 
-    if (vagrant -> boxesRunning()) {
+    if (vagrant->boxesRunning()) {
         setIcon(QIcon(":/images/vagrant-up.png"));
     } else {
         setIcon(QIcon(":/images/vagrant-down.png"));

@@ -5,13 +5,12 @@
 #include <QDir>
 #include <QJsonDocument>
 #include <QJsonObject>
-//#include <QDebug>
+#include <QDebug>
 
 Vagrant::Vagrant() {
-
 }
 
-bool Vagrant::boxesRunning() {
+bool Vagrant::readMachineIndex() {
 
     QString homePath = QDir::homePath();
     QFile indexFile(homePath + "/.vagrant.d/data/machine-index/index");
@@ -25,9 +24,7 @@ bool Vagrant::boxesRunning() {
 
     QJsonDocument indexDoc(QJsonDocument::fromJson(indexData));
     QJsonObject indexObj = indexDoc.object();
-    QJsonObject machinesObj(indexObj["machines"].toObject());
-
-    bool running = false;
+    QJsonObject machinesObj = indexObj["machines"].toObject();
 
     foreach (const QJsonValue &value, machinesObj) {
         QJsonObject machine = value.toObject();
@@ -38,6 +35,12 @@ bool Vagrant::boxesRunning() {
         }
     }
 
+    return true;
+}
+
+bool Vagrant::boxesRunning() {
+
+    readMachineIndex();
     return running;
 
 }
