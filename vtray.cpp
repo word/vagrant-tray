@@ -6,9 +6,6 @@
 #include <QFile>
 #include <QDir>
 #include <QTimer>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QDebug>
 
 VTray::VTray()
 {
@@ -43,10 +40,10 @@ void VTray::setStatus() {
     QJsonObject::iterator boxIt;
 
     for (boxIt = vagrant->boxes->begin(); boxIt != vagrant->boxes->end(); boxIt++) {
-        QString boxId = boxIt.key();
+        QString boxId      = boxIt.key();
         QJsonObject boxObj = boxIt.value().toObject();
-        QString boxName = boxObj["name"].toString();
-        QString boxState = boxObj["state"].toString();
+        QString boxName    = boxObj["name"].toString();
+        QString boxState   = boxObj["state"].toString();
 
         if (boxState == "running") {
            boxesRunning = true;

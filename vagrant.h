@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QVector>
 
 class Vagrant : public QObject
 {
@@ -13,8 +12,6 @@ class Vagrant : public QObject
 public:
     void readMachineIndex();
     QJsonObject *boxes = new QJsonObject;
-
-
 };
 
 

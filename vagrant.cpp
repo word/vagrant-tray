@@ -1,11 +1,7 @@
 #include "vagrant.h"
 
-#include <QCoreApplication>
 #include <QFile>
 #include <QDir>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QDebug>
 
 void Vagrant::readMachineIndex() {
 
