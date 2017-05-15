@@ -5,7 +5,6 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QVector>
-#include "box.h"
 
 class Vagrant : public QObject
 {
