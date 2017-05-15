@@ -3,21 +3,19 @@
 
 #include <QObject>
 #include <QJsonObject>
+#include <QJsonDocument>
+#include <QVector>
+#include "box.h"
 
 class Vagrant : public QObject
 {
     Q_OBJECT
 
-
 public:
-    Vagrant();
-    bool boxesRunning();
+    void readMachineIndex();
+    QJsonObject *boxes = new QJsonObject;
 
-public slots:
-    bool readMachineIndex();
 
-private:
-    bool running = false;
 };
 
 

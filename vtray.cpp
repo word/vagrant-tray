@@ -8,7 +8,7 @@
 #include <QTimer>
 #include <QJsonDocument>
 #include <QJsonObject>
-//#include <QDebug>
+#include <QDebug>
 
 VTray::VTray()
 {
@@ -25,7 +25,7 @@ VTray::VTray()
     // set initial status
     setStatus();
 
-    // periodically check setStatus
+    // periodically set status
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(setStatus()));
     timer->start(2000);
@@ -34,10 +34,26 @@ VTray::VTray()
 
 void VTray::setStatus() {
 
-    if (vagrant->boxesRunning()) {
+    vagrant -> readMachineIndex();
+
+    bool boxesRunning = false;
+
+    QJsonObject::iterator boxIt;
+
+    for (boxIt = vagrant->boxes->begin(); boxIt != vagrant->boxes->end(); boxIt++) {
+        QString boxId = boxIt.key();
+        QJsonObject boxObj = boxIt.value().toObject();
+        QString boxName = boxObj["name"].toString();
+        QString boxState = boxObj["state"].toString();
+
+        if (boxState == "running") {
+           boxesRunning = true;
+        }
+    }
+
+    if ( boxesRunning ) {
         setIcon(QIcon(":/images/vagrant-up.png"));
     } else {
         setIcon(QIcon(":/images/vagrant-down.png"));
     }
-
 }
