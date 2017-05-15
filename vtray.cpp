@@ -22,6 +22,8 @@ VTray::VTray()
 
     setContextMenu(trayIconMenu);
 
+    vagrant = new Vagrant;
+
     // set initial status
     setStatus();
 
