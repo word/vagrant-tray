@@ -11,6 +11,7 @@ class Vagrant : public QObject
 
 public:
     void readMachineIndex();
+    QString getIndexPath();
     QJsonObject *boxes = new QJsonObject;
 };
 

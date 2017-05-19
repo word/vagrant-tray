@@ -5,8 +5,7 @@
 
 void Vagrant::readMachineIndex() {
 
-    QString homePath = QDir::homePath();
-    QFile indexFile(homePath + "/.vagrant.d/data/machine-index/index");
+    QFile indexFile(getIndexPath());
 
     if (!indexFile.open(QIODevice::ReadOnly)) {
         qWarning("Couldn't open machine index file.");
@@ -18,4 +17,9 @@ void Vagrant::readMachineIndex() {
     QJsonObject indexObj = indexDoc.object();
     *boxes = indexObj["machines"].toObject();
 
+}
+
+QString Vagrant::getIndexPath() {
+
+    return QDir::homePath() + "/.vagrant.d/data/machine-index/index";
 }

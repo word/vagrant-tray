@@ -5,7 +5,10 @@
 #include <QMenu>
 #include <QFile>
 #include <QDir>
-#include <QTimer>
+//#include <QTimer>
+#include <QFileSystemWatcher>
+#include <QDebug>
+
 
 VTray::VTray()
 {
@@ -25,11 +28,23 @@ VTray::VTray()
     setStatus();
 
     // periodically set status
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(setStatus()));
-    timer->start(2000);
+    //timer = new QTimer(this);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(setStatus()));
+    //timer->start(2000);
 
+    // Monitor the vagrant index file for changes
+    watcher = new QFileSystemWatcher();
+    watcher -> addPath(vagrant -> getIndexPath());
+    QObject::connect(watcher, SIGNAL(fileChanged(QString)), this, SLOT(indexChanged()));
 }
+
+
+void VTray::indexChanged() {
+    setStatus();
+    // re-arm the watcher
+    watcher -> addPath(vagrant -> getIndexPath());
+}
+
 
 void VTray::setStatus() {
 
